@@ -2,9 +2,12 @@ from flask import Flask, request, redirect
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import app
+import os
+import socket
+
 
 app = Flask(__name__)
-app.debug = True
 
 # adding configuration for using a sqlite database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///games.db'
@@ -70,5 +73,17 @@ def erase(id):
 	db.session.commit()
 	return redirect('/')
 
+
+
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=80)
+	hostname = socket.gethostname()
+	local_ip = socket.gethostbyname(hostname)
+	app.run(host=local_ip, port=os.environ.get('PORT'), debug=True)
+
+
+
+
+
+
+   # local_ip = socket.gethostbyname(hostname)
+    #app.run(host=local_ip, port=os.environ.get('PORT'), debug=True)
