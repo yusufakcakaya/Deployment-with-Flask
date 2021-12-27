@@ -9,6 +9,9 @@ Games obsessed manager has a nice little side project for you: vizualize some in
 He'd like you to show him a proof of concept to translate data, visualize said data and deploy a little server so he can see if it is worth investing more time in.
 So, in these case I tried to clean data visualize it and create a frame with flask.
 
+Data sets are cleaned at Jupyter Notebook and then created a basic flask framework with VS Code.Than a container created by Docker and deployed by Heroku.
+For Flask application you can use this URL: https://git.heroku.com/gamesdeployment.git
+
 
 #### Which dataset?
 
