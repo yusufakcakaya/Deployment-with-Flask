@@ -2,15 +2,23 @@ from flask import Flask, request, redirect
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from sqlalchemy import Column, Integer, String,Boolean
+from sqlalchemy.engine import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 import app
 import os
 import socket
-
+import csv
+import pandas as pd
 
 app = Flask(__name__)
 
 # adding configuration for using a sqlite database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///games.db'
+
+images = os.path.join('static','images')
+
+app.config['UPLOAD_FOLDER'] = images
 
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)
@@ -18,6 +26,7 @@ db = SQLAlchemy(app)
 # Settings for migrations
 migrate = Migrate(app, db)
 
+engine = create_engine("sqlite:///:memory:", echo=True)
 # Models
 class Game(db.Model):
 	# Id : Field which stores unique id for every row in database table.
@@ -40,7 +49,8 @@ def create_tables():
 @app.route('/')
 def index():
 	games = Game.query.all()
-	return render_template('index.html', games=games)
+	pic = os.path.join(app.config['UPLOAD_FOLDER'],'download.jpeg')
+	return render_template('index.html', games=games,user_image = pic)
 
 @app.route('/add_game')
 def add_game():

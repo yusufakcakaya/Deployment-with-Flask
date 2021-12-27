@@ -5,7 +5,7 @@
 </head>
 <body>
 	<h3>GAMES</h3>
-	<a href="/add_game">ADD</a>
+	<img src="{{ user_image }}" alt="OS SYSTEMS">
 	<br>
 	<table>
 		<thead>
@@ -22,8 +22,11 @@
 			<td>{{data.required_age}}</td>
 			<td>{{data.price}}</td>
 			<td><a href="/delete/{{data.id}}" type="button">Delete</a></td>
+
 		</tbody>
 		{% endfor%}
 	</table>
+	<a href="/add_game">ADD</a>
+	
 </body>
 </html>
